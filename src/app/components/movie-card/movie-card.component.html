@@ -1,0 +1,9 @@
+﻿<div class="movie-card" [routerLink]="['/movies', movie.movieId || movie.id]">
+  <img [src]="imageUrl" [alt]="movie.title" class="movie-image">
+
+  <div class="movie-info">
+    <h3>{{ movie.title }}</h3>
+    <p>{{ movie.language || displayLanguage }}</p>
+    <p>{{ movie.genre || displayGenre }}</p>
+  </div>
+</div>

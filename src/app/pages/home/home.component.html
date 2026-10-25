@@ -1,0 +1,7 @@
+﻿<h2 class="heading">Recommended Movies</h2>
+<div class="movies">
+
+    @for (movie of movies; track movie.movieId || movie.id) {
+    <app-movie-card [movie]="movie"></app-movie-card>
+    }
+</div>

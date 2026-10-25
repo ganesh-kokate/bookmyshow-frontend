@@ -1,0 +1,62 @@
+<div class="seat-page">
+    <div class="seat-header">
+        <h2>Select your seats</h2>
+        <p>Choose seats for your show</p>
+    </div>
+
+
+
+    <div class="seat-layout">
+        @for (row of seatRows; track row.rowName) {
+        <div class="seat-row">
+            <div class="row-info">
+                <strong>{{ row.rowName }}</strong>
+                <small>₹{{ row.price }}</small>
+            </div>
+
+            <div class="seats">
+                @for (seat of row.seats; track seat.seatId) {
+                <button type="button" class="seat" [class.available]="seat.status === 'available'"
+                    [class.selected]="isSelected(seat)" [class.booked]="seat.status === 'booked'"
+                    [disabled]="seat.status !== 'available'"
+                    [attr.aria-label]="'Seat ' + seat.seatId + ', ₹' + seat.price">
+
+                    {{ seat.seatId.substring(1) }}
+                </button>
+                }
+            </div>
+        </div>
+        }
+    </div>
+
+    <div class="seat-legend">
+        <span><i class="available-dot"></i> Available</span>
+        <span><i class="selected-dot"></i> Selected</span>
+        <span><i class="booked-dot"></i> Booked</span>
+    </div>
+
+    @if (selectedSeats.length > 0) {
+    <div class="booking-summary">
+        <div>
+            <strong>{{ selectedSeats.length }} seat(s) selected</strong>
+            <p>
+                <!-- {{ selectedSeats.map(s => s.seatId).join(', ') }} -->
+            </p>
+        </div>
+
+        <div class="total">
+            <small>Total amount</small>
+            <h2>₹{{ totalPrice }}</h2>
+        </div>
+
+        <button type="button" class="book-button" (click)="proceedToBooking()">
+            Proceed
+        </button>
+    </div>
+    }
+
+    <div class="screen-container">
+        <div class="screen"></div>
+        <span>SCREEN THIS WAY</span>
+    </div>
+</div>

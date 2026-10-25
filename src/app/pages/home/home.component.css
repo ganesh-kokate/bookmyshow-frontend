@@ -1,0 +1,15 @@
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 20px;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+}
+
+.heading {
+    padding-left: 20px;
+    color: #BA8E23;
+}

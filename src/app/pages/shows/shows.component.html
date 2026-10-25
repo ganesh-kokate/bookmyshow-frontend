@@ -1,0 +1,83 @@
+<div class="shows-page">
+    <main class="shows-container">
+
+        <section class="movie-heading">
+            <div>
+                <p class="eyebrow">NOW SHOWING</p>
+                <h2>{{ movieTitle || 'Available Shows' }}</h2>
+                <p class="subtitle">Select a cinema and showtime</p>
+            </div>
+        </section>
+
+        @if (loading) {
+        <div class="message">Loading available shows...</div>
+        } @else if (errorMessage) {
+        <div class="message error">{{ errorMessage }}</div>
+        <button class="retry-btn" (click)="loadShows()">Try Again</button>
+        } @else if (shows.length === 0) {
+        <div class="empty-state">
+            <h3>No shows available</h3>
+            <p>There are currently no shows scheduled for this movie.</p>
+        </div>
+        } @else {
+
+        <div class="shows-summary">
+            <span>{{ getTotalShows() }} show(s) available</span>
+            <span class="legend">
+                <span class="legend-dot"></span>
+                Available showtimes
+            </span>
+        </div>
+
+        <div class="theater-list">
+
+            @for (theater of shows; track theater.theaterId) {
+            <article class="theater-card">
+
+                <div class="theater-info">
+                    <div class="theater-icon">CINEMA</div>
+
+                    <div class="theater-details">
+                        <h3>{{ theater.theaterName }}</h3>
+
+                        <p class="theater-location">
+                            <span class="location-icon">●</span>
+                            {{ theater.theaterCity }}
+                        </p>
+
+                        <span class="show-count">
+                            {{ theater.shows.length }}
+                            {{ theater.shows.length === 1 ? 'show' : 'shows' }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="showtime-section">
+                    <p class="showtime-heading">SELECT SHOWTIME</p>
+
+                    <div class="showtime-list">
+                        @for (show of theater.shows; track show.showId) {
+                        <button class="showtime-btn" type="button" (click)="selectShow(show.showId)"
+                            [attr.aria-label]="'Select show at ' + theater.theaterName + ' at ' + formatTime(show.startTime)">
+                            <span class="time">
+                                {{ formatTime(show.startTime) }}
+                            </span>
+
+                            <span class="availability">Available</span>
+                        </button>
+                        }
+                    </div>
+                </div>
+
+            </article>
+            }
+
+        </div>
+        }
+
+        <p class="booking-note">
+            Select a showtime to proceed to seat selection.
+        </p>
+
+    </main>
+</div>

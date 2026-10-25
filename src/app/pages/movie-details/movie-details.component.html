@@ -1,0 +1,51 @@
+<div class="movie-details-page">
+
+    @if (movie) {
+    <section class="movie-banner">
+        <!-- <img class="movie-banner-background" [src]="banerUrl" alt="" aria-hidden="true"> -->
+
+        <div class="movie-poster">
+            <img [src]="imageUrl" [alt]="movie.title">
+        </div>
+
+        <div class="movie-info">
+            <h1>{{ movie.title }}</h1>
+
+            <div class="movie-tags">
+                Languages :
+                @for(language of movie.languages;track movie.movieId)
+                {
+                <span>
+                    {{ language.name }}
+                </span>
+                }
+            </div>
+
+            <div class="movie-tags">
+                Genres :
+                @for(genre of movie.genres;track movie.movieId)
+                {
+                <span>
+                    {{ genre.name }}
+                </span>
+                }
+            </div>
+
+
+
+            <button class="book-btn" (click)="bookTickets()">Book Tickets</button>
+        </div>
+
+    </section>
+
+    <section class="about-section">
+        <h2>About the Movie</h2>
+        <p>
+            {{movie.descripption}}
+        </p>
+    </section>
+    } @else {
+    <h2>Movie not found!</h2>
+    }
+
+</div>
