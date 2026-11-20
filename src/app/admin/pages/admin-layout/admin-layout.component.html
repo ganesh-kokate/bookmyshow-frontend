@@ -1,0 +1,69 @@
+<div class="admin-layout">
+
+
+    <aside class="sidebar">
+        <div class="brand">
+            book<span>my</span>show
+            <small>ADMIN PANEL</small>
+        </div>
+
+        <div class="menu-label">MAIN MENU</div>
+
+        <nav class="sidebar-nav">
+            <a routerLink="/admin/theatres" routerLinkActive="active">
+                <span class="menu-icon">▦</span>
+                Theatres
+            </a>
+
+            <a routerLink="/admin/movie" routerLinkActive="active">
+                <span class="menu-icon">M</span>
+                Movie
+            </a>
+
+            <a routerLink="/admin/screens/add" routerLinkActive="active">
+                <span class="menu-icon">▣</span>
+                Add Screen
+            </a>
+
+            <a routerLink="/admin/seats" routerLinkActive="active">
+                <span class="menu-icon">▤</span>
+                Configure Seats
+            </a>
+
+            <a routerLink="/admin/shedule" routerLinkActive="active">
+                <span class="menu-icon">◷</span>
+                Manage Shows
+            </a>
+
+            <a routerLink="/admin/shows/add" routerLinkActive="active">
+                <span class="menu-icon">＋</span>
+                Add Show
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="admin-avatar">A</div>
+            <div class="admin-info">
+                <strong>Theator Admini</strong>
+                <small></small>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-area">
+
+        <header class="topbar">
+            <div>
+                <h2>Management Console</h2>
+                <p>Manage your BookMyShow platform</p>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <router-outlet></router-outlet>
+        </section>
+
+    </main>
+
+</div>

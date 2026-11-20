@@ -1,0 +1,72 @@
+<div class="page-container">
+    <div class="page-heading">
+        <div>
+            <h1>Add Show</h1>
+            <p>Create a movie show for a theatre screen.</p>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <form #showForm="ngForm" (ngSubmit)="onSubmit()">
+            <!-- Screen -->
+            <div class="form-group">
+                <label for="screen">Screen <span>*</span></label>
+
+                <select id="screen" name="screen" [(ngModel)]="selectedScreenName" required>
+
+                    <option value="" disabled>Select a screen</option>
+
+                    <option *ngFor="let screenName of screens" [value]="screenName">
+                        {{ screenName }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Movie -->
+            <div class="form-group">
+                <label for="movie">Movie <span>*</span></label>
+
+                <select id="movie" name="movie" [(ngModel)]="selectedMovieName" required #movie="ngModel">
+
+                    <option value="" disabled>Select a movie</option>
+
+                    <option *ngFor="let movieTitle of movies" [value]="movieTitle">
+                        {{ movieTitle }}
+                    </option>
+                </select>
+
+                <small class="error" *ngIf="movie.invalid && movie.touched">
+                    Please select a movie.
+                </small>
+            </div>
+
+            <!-- Start time -->
+            <div class="form-group">
+                <label for="startTime">Show Start Time <span>*</span></label>
+
+                <input type="datetime-local" id="startTime" name="startTime" [(ngModel)]="startTime" required
+                    #time="ngModel" />
+
+                <small class="error" *ngIf="time.invalid && time.touched">
+                    Please select a start date and time.
+                </small>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" (click)="showForm.resetForm({
+            screen: '',
+            movie: '',
+            startTime: ''
+          }); 
+          selectedScreenName = ''; selectedMovieName = ''; startTime = ''">
+                    Reset
+                </button>
+
+                <button type="submit" class="btn-primary" [disabled]="showForm.invalid">
+                    Create Show
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

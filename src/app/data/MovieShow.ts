@@ -38,3 +38,9 @@ export interface SeatApiResponse {
     showId: string;
     seats: Seat[];
 }
+
+export interface AddShowRequest {
+    screenName: string;
+    movieName: string;
+    startTime: string;
+}
