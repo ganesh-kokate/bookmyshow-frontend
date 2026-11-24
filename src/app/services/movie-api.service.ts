@@ -33,4 +33,10 @@ export class MovieApiService {
       `${this.apiUrl}/get/${encodeURIComponent(title)}`
     );
   }
+
+  searchMovieByName(title: string): Observable<ApiResponse<any[]>> {
+    return this.http.get<ApiResponse<any[]>>(
+      `${this.apiUrl}/getbytext/` + title
+    );
+  }
 }
