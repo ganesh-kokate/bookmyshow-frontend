@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieApiService } from '../../services/movie-api.service';
 import { ShowService } from '../../services/show.service';
 import { MovieShowsDTO } from '../../data/MovieShow';
+import { BookingState } from '../../services/booking.state';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ShowsComponent implements OnInit {
     private route: ActivatedRoute,
     //private movieApiService: MovieApiService,
     private showApiService: ShowService,
-    private router: Router
+    private router: Router,
+    public bookingState: BookingState
   ) { }
 
   movieId!: number;
@@ -72,7 +74,8 @@ export class ShowsComponent implements OnInit {
     );
   }
 
-  selectShow(showId: String): void {
+  selectShow(showId: string): void {
+    this.bookingState.setShow(showId);
     this.router.navigate(['/seatlayout', showId]);
   }
 

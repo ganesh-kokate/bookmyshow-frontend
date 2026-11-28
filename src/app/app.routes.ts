@@ -5,6 +5,7 @@ import { ShowsComponent } from './pages/shows/shows.component';
 import { SeatLayoutComponent } from './pages/seat-layout/seat-layout.component';
 import { AdminLayoutComponent } from './admin/pages/admin-layout/admin-layout.component';
 import { AddShowComponent } from './admin/pages/add-show/add-show.component';
+import { PaymentDetailsComponent } from './pages/payment-details/payment-details.component';
 
 
 export const routes: Routes = [
@@ -27,6 +28,10 @@ export const routes: Routes = [
     {
         path: 'movies',
         component: HomeComponent
+    },
+    {
+        path: 'payments',
+        component: PaymentDetailsComponent
     },
     // Admin routes
     {

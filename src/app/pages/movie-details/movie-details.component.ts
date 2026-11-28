@@ -5,6 +5,7 @@ import { MovieApiService } from '../../services/movie-api.service';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { SelectSeatsComponent } from '../../components/select-seats/select-seats.component';
 
 @Component({
   selector: 'app-movie-details',

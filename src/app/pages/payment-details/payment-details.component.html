@@ -1,0 +1,115 @@
+<div class="payment-page">
+
+    <div class="payment-container">
+
+        <!-- Header -->
+        <div class="page-header">
+            <button class="back-btn" type="button" (click)="goBack()">←</button>
+            <div>
+                <h2>Payment</h2>
+                <p>Complete your booking</p>
+            </div>
+        </div>
+
+        <div class="payment-layout">
+
+            <!-- Left: Payment methods -->
+            <div class="payment-methods">
+
+                <h3>Payment Method</h3>
+
+                <div class="payment-option selected">
+                    <input type="radio" name="payment" checked />
+                    <div class="payment-icon">📱</div>
+                    <div class="payment-info">
+                        <strong>UPI</strong>
+                        <small>Google Pay, PhonePe, Paytm</small>
+                    </div>
+                </div>
+
+                <div class="payment-option">
+                    <input type="radio" name="payment" />
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-info">
+                        <strong>Credit / Debit Card</strong>
+                        <small>Visa, Mastercard, RuPay</small>
+                    </div>
+                </div>
+
+                <div class="payment-option">
+                    <input type="radio" name="payment" />
+                    <div class="payment-icon">🏦</div>
+                    <div class="payment-info">
+                        <strong>Net Banking</strong>
+                        <small>All major banks supported</small>
+                    </div>
+                </div>
+
+                <div class="payment-option">
+                    <input type="radio" name="payment" />
+                    <div class="payment-icon">👛</div>
+                    <div class="payment-info">
+                        <strong>Wallets</strong>
+                        <small>Paytm and other wallets</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right: Booking summary -->
+            <div class="booking-summary">
+
+                <h3>Booking Summary</h3>
+
+                <div class="movie-details">
+                    <div class="movie-poster">
+                        <span>🎬</span>
+                    </div>
+
+                    <div class="movie-info">
+                        <h4>{{ movieTitle }}</h4>
+                        <p>{{ theatreName }}</p>
+                        <p>{{ showDate }} · {{ showTime }}</p>
+                        <p>Seats: {{ selectedSeats.join(', ') }}</p>
+                    </div>
+                </div>
+
+                <div class="price-details">
+                    <h4>Price Details</h4>
+
+                    <div class="price-row">
+                        <span>Ticket Price</span>
+                        <span>₹{{ ticketPrice }}</span>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Convenience Fee</span>
+                        <span>₹{{ convenienceFee }}</span>
+                    </div>
+
+                    <div class="price-row">
+                        <span>GST</span>
+                        <span>₹{{ gst }}</span>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="price-row total">
+                        <strong>Total Amount</strong>
+                        <strong>₹{{ totalAmount }}</strong>
+                    </div>
+                </div>
+
+                <button class="pay-btn" type="button" (click)="makePayment()">
+                    Pay ₹{{ totalAmount }}
+                </button>
+
+                <p class="secure-text">🔒 Secure payment powered by encrypted checkout</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

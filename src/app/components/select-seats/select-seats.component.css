@@ -1,0 +1,133 @@
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.seat-popup {
+    width: 560px;
+    max-width: calc(100% - 32px);
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    justify-content: center;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: #222;
+}
+
+.close-btn {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    color: #777;
+    cursor: pointer;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 14px;
+    margin: 12px 0 22px;
+}
+
+.seat-options {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 14px;
+}
+
+.seat-option {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: white;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.seat-option:hover {
+    border-color: #f84464;
+    color: #f84464;
+}
+
+.seat-option.active {
+    background: #f84464;
+    border-color: #f84464;
+    color: white;
+}
+
+.popup-footer {
+    margin-top: 28px;
+}
+
+.continue-btn {
+    width: 100%;
+    padding: 13px;
+    background: #f84464;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.continue-btn:hover {
+    background: #e73555;
+}
+
+@media (max-width: 400px) {
+    .seat-popup {
+        padding: 20px;
+    }
+
+    .seat-options {
+        gap: 10px;
+    }
+
+    .seat-option {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+.vehicle-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 22px 0 24px;
+}
+
+.vehicle-img {
+    width: auto;
+    height: 100px;
+    max-width: 100px;
+    object-fit: contain;
+    display: block;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

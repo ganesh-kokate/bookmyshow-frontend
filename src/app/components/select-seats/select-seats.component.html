@@ -1,0 +1,26 @@
+<div class="popup-overlay">
+    <div class="seat-popup">
+        <div class="popup-header">
+            <h2>How Many Seats?</h2>
+        </div>
+
+        <div class="vehicle-preview">
+            <img [src]="vehiclePreview.src" [alt]="vehiclePreview.alt" class="vehicle-img" />
+        </div>
+
+        <div class="seat-options">
+            @for (seat of seatOptions; track seat) {
+            <button type="button" class="seat-option" [class.active]="numberOfSeats === seat"
+                (click)="selectSeat(seat)">
+                {{ seat }}
+            </button>
+            }
+        </div>
+
+        <div class="popup-footer">
+            <button type="button" class="continue-btn" (click)="continue()">
+                Select {{ numberOfSeats }} Seats
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { SeatsService } from '../../services/seats.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { SeatRow, Seat, SeatApiResponse } from '../../data/MovieShow';
+import { SeatRow, Seat, SeatApiResponse, BookingRequest } from '../../data/MovieShow';
+import { SelectSeatsComponent } from '../../components/select-seats/select-seats.component';
+import { BookingState } from '../../services/booking.state';
+import { BookingServiceService } from '../../services/booking-service.service';
 
 @Component({
   selector: 'app-seat-layout',
-  imports: [],
+  imports: [SelectSeatsComponent],
   templateUrl: './seat-layout.component.html',
   styleUrl: './seat-layout.component.css'
 })
@@ -15,13 +18,15 @@ export class SeatLayoutComponent {
   showId: string;
   responce?: SeatApiResponse;
   seatRows: SeatRow[] = [];
-  selectedSeats: Seat[] = [];
+  showSeatPopup = true;
+  selectedSeats: string[] = [];
+  showID: string = "";
+  bookingId: string = "";
 
-  constructor(private route: ActivatedRoute, private seatApiService: SeatsService, private router: Router) {
+
+  constructor(private route: ActivatedRoute, private seatApiService: SeatsService, private router: Router, public bookingState: BookingState, private bookingservice: BookingServiceService) {
     this.showId = this.route.snapshot.paramMap.get('showId') ?? '';
   }
-
-
 
   ngOnInit() {
 
@@ -70,24 +75,56 @@ export class SeatLayoutComponent {
   }
 
   isSelected(seat: Seat): boolean {
-    return this.selectedSeats.some(
-      s => s.seatId === seat.seatId
-    );
+    return this.selectedSeats.includes(seat.seatId);
   }
 
-  get totalPrice(): number {
-    return this.selectedSeats.reduce(
-      (total, seat) => total + seat.price,
-      0
-    );
+  selectSeat(seat: string): void {
+    if (this.selectedSeats.includes(seat)) {
+      this.bookingState.removeSeat(seat);
+      return;
+    }
+
+    if (this.bookingState.numberOfSeats() <= 0) {
+      return;
+    }
+
+    this.bookingState.addSeat(seat);
+    this.bookingState.decrementSeats();
+    this.selectedSeats = this.bookingState.selectedSeats();
   }
 
-  proceedToBooking(): void {
-    // Pass the selected seat IDs to your booking flow.
-    console.log(
-      'Selected seats:',
-      this.selectedSeats.map(seat => seat.seatId)
-    );
+  closePopup(): void {
+    console.log("close popup");
+    this.showSeatPopup = false;
+  }
+
+  // ngOnDestroy(): void {
+  //   this.bookingState.clearBooking();
+  // }
+
+  continueToPayment(): void {
+
+    const request: BookingRequest = {
+      userId: 'USER001',
+      lockSeatsRequest: {
+        seatIds: this.bookingState.selectedSeats(),
+        showId: this.bookingState.showId()
+      }
+    };
+
+    console.log(request)
+
+    this.bookingservice.createBooking(request).subscribe({
+      next: (response) => {
+        console.log('Booking successful:', response);
+        this.bookingId = response || '';
+        this.router.navigate(['/payments']);
+      },
+      error: (error) => {
+        console.error('Booking failed:', error);
+      }
+    });
+    this.router.navigate(['/payments']);
   }
 
 }

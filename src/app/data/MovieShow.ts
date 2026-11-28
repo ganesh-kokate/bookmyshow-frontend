@@ -44,3 +44,13 @@ export interface AddShowRequest {
     movieName: string;
     startTime: string;
 }
+
+export interface LockSeatsRequest {
+    seatIds: string[];
+    showId: string;
+}
+
+export interface BookingRequest {
+    userId: string;
+    lockSeatsRequest: LockSeatsRequest;
+}

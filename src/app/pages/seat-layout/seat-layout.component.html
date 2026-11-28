@@ -3,9 +3,18 @@
         <h2>Select your seats</h2>
         <p>Choose seats for your show</p>
     </div>
+    <div class="seat-counter">
+        <strong>
+            {{ bookingState.numberOfSeats() }}
+        </strong>
+        <span>Seats remaining</span>
+    </div>
 
 
-
+    @if (showSeatPopup) {
+    <app-select-seats (closePopup)="closePopup()">
+    </app-select-seats>
+    }
     <div class="seat-layout">
         @for (row of seatRows; track row.rowName) {
         <div class="seat-row">
@@ -17,11 +26,11 @@
             <div class="seats">
                 @for (seat of row.seats; track seat.seatId) {
                 <button type="button" class="seat" [class.available]="seat.status === 'available'"
-                    [class.selected]="isSelected(seat)" [class.booked]="seat.status === 'booked'"
+                    [class.selected]="isSelected(seat)"
+                    [class.booked]="seat.status === 'booked'  || seat.status === 'locked'"
                     [disabled]="seat.status !== 'available'"
-                    [attr.aria-label]="'Seat ' + seat.seatId + ', ₹' + seat.price">
-
-                    {{ seat.seatId.substring(1) }}
+                    [attr.aria-label]="'Seat ' + seat.seatId + ', ₹' + seat.price" (click)="selectSeat(seat.seatId)">
+                    {{ seat.seatId }}
                 </button>
                 }
             </div>
@@ -35,28 +44,18 @@
         <span><i class="booked-dot"></i> Booked</span>
     </div>
 
-    @if (selectedSeats.length > 0) {
-    <div class="booking-summary">
-        <div>
-            <strong>{{ selectedSeats.length }} seat(s) selected</strong>
-            <p>
-                <!-- {{ selectedSeats.map(s => s.seatId).join(', ') }} -->
-            </p>
-        </div>
 
-        <div class="total">
-            <small>Total amount</small>
-            <h2>₹{{ totalPrice }}</h2>
-        </div>
-
-        <button type="button" class="book-button" (click)="proceedToBooking()">
-            Proceed
-        </button>
-    </div>
-    }
 
     <div class="screen-container">
         <div class="screen"></div>
         <span>SCREEN THIS WAY</span>
     </div>
+
+    @if (bookingState.numberOfSeats() === 0) {
+    <div class="payment-section">
+        <button type="button" class="payment-btn" (click)="continueToPayment()">
+            Continue to Payment
+        </button>
+    </div>
+    }
 </div>
